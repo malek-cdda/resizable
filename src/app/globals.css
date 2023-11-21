@@ -47,3 +47,36 @@
   bottom: -5px;
   cursor: nwse-resize;
 } */
+
+/* Resizable Parent */
+/* Resizable Parent */
+.resizable-parent {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #ccc;
+  overflow: hidden; /* Prevent child divs from overflowing */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+/* Resizable Child */
+.childDiv {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  border: 1px solid #ddd;
+  margin: 0; /* Remove default margin */
+}
+
+/* Resizer Handle */
+.childDiv-resizer {
+  width: 10px;
+  height: 10px;
+  background-color: #333;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize; /* Cursor for the bottom right corner */
+}

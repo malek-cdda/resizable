@@ -11,64 +11,81 @@ const Home = () => {
     ) {
       const newSize = document.getElementsByClassName("resizable")[i];
 
-      newSize.addEventListener("click", function (e) {
-        // console.log(i);
-        const element = document.querySelector(`.resizable${i}`);
-        element.style.zIndex = "100";
-        for (
-          let j = 0;
-          j < document.getElementsByClassName("resizable").length;
-          j++
-        ) {
-          if (j !== i) {
-            const element = document.querySelector(`.resizable${j}`);
-            element.style.zIndex = "1";
-          }
-        }
-      });
-
+      // newSize.addEventListener("click", function (e) {
+      //   // console.log(i);
+      //   const element = document.querySelector(`.resizable${i}`);
+      //   element.style.zIndex = "100";
+      //   for (
+      //     let j = 0;
+      //     j < document.getElementsByClassName("resizable").length;
+      //     j++
+      //   ) {
+      //     if (j !== i) {
+      //       const element = document.querySelector(`.resizable${j}`);
+      //       element.style.zIndex = "1";
+      //     }
+      //   }
+      // });
+      console.log(newSize);
       newSize.addEventListener("mousemove", function (e) {
         // console.log(i);
-        makeResizableDiv(`.resizable${i}`, ` .resizer${i}`);
+        makeResizableDiv(`.resizable${i}`, i, ` .resizer${i}`);
       });
     }
   }, []);
   return (
-    <div className="container mx-auto">
-      <div
-        className=" left-72 top-72 main-div relative w-[600px] h-[600px] border border-green-500"
-        id="main-div">
+    <div className="container mx-auto mt-5">
+      <div className=" flex justify-between space-x-3">
         <div
-          className=" resizable resizable0 w-32 h-32 border border-green-500 mx-5 relative"
-          draggable="true">
-          <div className="resizers h-full w-full border-green-500 relative bg-red-300">
-            <div className=" top-left resizer0 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div>
-            <div className="resizer0 top-right cursor-nesw-resize absolute -top-0 -right-0 border-t border-r  border-blue-700 w-4 h-4"></div>
-            <div className="resizer0 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
-            <div className="resizer0 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div>
+          className=" resizable resizable0  resizers1  relative h-20   overflow-y-hidden border-green-500  bg-red-300"
+          style={{ flex: "30 1 0px", overflow: "hidden" }}>
+          <div className="resizers h-full   border-green-500   bg-red-300">
+            {/* <div className=" top-left resizer0 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div> */}
+            <div className="resizer0 top-right cursor-row-resize absolute top-1/2 -right-0   border-r  border-blue-700 w-4 h-4"></div>
+            {/* <div className="resizer0 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
+            <div className="resizer0 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div> */}
           </div>
         </div>
         <div
-          className="resizable resizable1   border w-32 h-32 m-5 relative "
-          draggable="true">
-          <div className="resizers h-full w-full border-green-500 bg-yellow-300">
-            <div className=" top-left resizer1 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div>
-            <div className="resizer1 top-right cursor-nesw-resize absolute -top-0 -right-0 border-t border-r  border-blue-700 w-4 h-4"></div>
-            <div className="resizer1 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
-            <div className="resizer1 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div>
+          className="   resizable resizable1 resizers2   h-20    border-green-500  bg-red-300"
+          style={{ flex: "40 100 110px", overflow: "hidden" }}>
+          <div className="resizers     border-green-500    relative bg-red-300 border h-20">
+            <div className="resizer1 top-right cursor-row-resize absolute top-1/2 -right-0   border-r  border-blue-700 w-4 h-4"></div>
+            {/* <div className="resizer1 bottom-right cursor-row-resize absolute bottom-0 right-1/2   border-b  border-blue-700 w-4 h-4"></div> */}
           </div>
         </div>
         <div
-          className="resizable resizable2  border w-32 h-32 mx-5 relative "
-          draggable="true">
-          <div className="resizers h-full w-full border-green-500 bg-green-300  ">
-            <div className=" top-left resizer2 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div>
-            <div className="resizer2 top-right cursor-nesw-resize absolute -top-0 -right-0 border-t border-r  border-blue-700 w-4 h-4"></div>
-            <div className="resizer2 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
-            <div className="resizer2 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div>
+          className="  resizable resizable2 resizers3  relative h-20    border-green-500  bg-red-300"
+          style={{ flex: "30 1 0px", overflow: "hidden" }}>
+          <div className="resizers h-full   border-green-500   bg-red-300">
+            {/* <div className=" top-left resizer2 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div> */}
+            <div className="resizer2 top-right cursor-row-resize absolute top-1/2 -right-0   border-r  border-blue-700 w-4 h-4"></div>
+            {/* <div className="resizer2 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
+            <div className="resizer2 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div> */}
           </div>
         </div>
       </div>
+
+      {/* <div
+        className=" resizable resizable0 w-32 h-32 border border-green-500 mx-5 relative"
+        draggable="true">
+        <div className="resizers h-full w-full border-green-500 relative bg-red-300">
+          <div className=" top-left resizer0 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div>
+          <div className="resizer0 top-right cursor-row-resize absolute top-1/2 -right-0   border-r  border-blue-700 w-4 h-4"></div>
+          <div className="resizer0 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
+          <div className="resizer0 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div>
+        </div>
+      </div>
+      <div
+        className=" resizable resizable1 w-32 h-32 border border-green-500 mx-5 relative"
+        draggable="true">
+        <div className="resizers h-full w-full border-green-500 relative bg-red-300">
+          <div className=" top-left resizer1 cursor-nwse-resize absolute -top-0 -left-0 border-t border-l  border-blue-700 w-4 h-4 "></div>
+          <div className="resizer1 top-right cursor-row-resize absolute top-1/2 -right-0   border-r  border-blue-700 w-4 h-4"></div>
+          <div className="resizer1 bottom-left cursor-nesw-resize absolute -bottom-0 -left-0 border-b border-l  border-blue-700 w-4 h-4 "></div>
+          <div className="resizer1 bottom-right cursor-nwse-resize absolute -bottom-0 -right-0 border-b border-r  border-blue-700 w-4 h-4"></div>
+        </div>
+      </div> */}
     </div>
   );
 };

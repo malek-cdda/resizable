@@ -1,10 +1,11 @@
-export function makeResizableDiv(div: any, div1: any) {
+let cd = 0;
+export function makeResizableDiv(div: any, newDivNum: any, div1: any) {
   // console.log(window.innerWidth, window.innerHeight);
-  const mainDiv = document.getElementById("main-div");
+  // const mainDiv = document.getElementById("main-div");
 
   const element = document.querySelector(div);
-  const value = window.getComputedStyle(element);
-  console.log("width", value.left, value.top, value.width, value.height);
+  // const value = window.getComputedStyle(element);
+
   const resizers = document.querySelectorAll(div + div1);
   const minimum_size = 20;
   let original_width = 0;
@@ -27,6 +28,7 @@ export function makeResizableDiv(div: any, div1: any) {
           .getPropertyValue("height")
           .replace("px", "")
       );
+
       original_x = element.getBoundingClientRect().left;
       original_y = element.getBoundingClientRect().top;
       original_mouse_x = e.pageX;
@@ -39,16 +41,12 @@ export function makeResizableDiv(div: any, div1: any) {
       if (currentResizer.classList.contains("bottom-right")) {
         const width = original_width + (e.pageX - original_mouse_x);
         const height = original_height + (e.pageY - original_mouse_y);
-
-        if (width > mainDiv.clientWidth) {
-          element.style.width = mainDiv.clientHeight - 20 + "px";
-        } else {
-          if (width > minimum_size) {
-            element.style.width = width + "px";
-          }
-          if (height > minimum_size) {
-            element.style.height = height + "px";
-          }
+        if (width > minimum_size) {
+          element.style.width = width + "px";
+          // decrease(newDivNum, "div", width - original_width);
+        }
+        if (height > minimum_size) {
+          element.style.height = height + "px";
         }
       } else if (currentResizer.classList.contains("bottom-left")) {
         const height = original_height + (e.pageY - original_mouse_y);
@@ -64,12 +62,22 @@ export function makeResizableDiv(div: any, div1: any) {
         const width = original_width + (e.pageX - original_mouse_x);
         const height = original_height - (e.pageY - original_mouse_y);
         if (width > minimum_size) {
-          element.style.width = width + "px";
+          const elements = document.querySelector(".resizers1");
+
+          const screenWidth = Number(window.innerWidth);
+
+          const width1: number = parseFloat(
+            (width / screenWidth) * 100
+          ).toFixed(1);
+          // console.log(cd, "dd");
+          elements.style.flex = `${width1} 1 0px`;
+          console.log("width1 = ", width1);
+          decrease(newDivNum, width, width1, width - original_width);
         }
-        if (height > minimum_size) {
-          element.style.height = height + "px";
-          element.style.top = original_y + (e.pageY - original_mouse_y) + "px";
-        }
+        // if (height > minimum_size) {
+        //   element.style.height = height + "px";
+        //   element.style.top = original_y + (e.pageY - original_mouse_y) + "px";
+        // }
       } else {
         const width = original_width - (e.pageX - original_mouse_x);
         const height = original_height - (e.pageY - original_mouse_y);
@@ -79,7 +87,7 @@ export function makeResizableDiv(div: any, div1: any) {
         }
         if (height > minimum_size) {
           element.style.height = height + "px";
-          element.style.top = 1 + "px";
+          element.style.top = original_y + (e.pageY - original_mouse_y) + "px";
         }
       }
     }
@@ -89,3 +97,21 @@ export function makeResizableDiv(div: any, div1: any) {
     }
   }
 }
+
+const decrease = (newDivNum: any, w1: any, div: any, w: any): any => {
+  const minimum_size = 50;
+  for (
+    let i = 1;
+    i < document.getElementsByClassName("resizable").length;
+    i++
+  ) {
+    const newSize = document.querySelectorAll(".resizable")[i];
+    console.log(newSize);
+    const newFlexGrow = (Number(newSize.style.flexGrow) + Number(div)).toFixed(
+      1
+    );
+    const parseFloatNum = parseFloat(100 - newFlexGrow);
+    console.log("parsefloat2", parseFloatNum);
+    newSize.style.flex = `${parseFloatNum} 1 0px`;
+  }
+};
